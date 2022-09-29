@@ -1,14 +1,10 @@
+from sklearn.preprocessing import LabelEncoder, RobustScaler
+from constant import *
+
 import pandas as pd
 import numpy as np
 import pickle
 import os
-
-from sklearn.preprocessing import LabelEncoder, RobustScaler
-
-CATEGORICAL_COLUMNS_PATH = "pickle_files\\categorical_columns.pkl"
-NUMERICAL_COLUMNS_PATH = "pickle_files\\numerical_columns.pkl"
-LABEL_ENCODERS_PATH = "pickle_files\\label_encoders.pkl"
-ROBUST_SCALERS_PATH = "pickle_files\\robust_scalers.pkl"
 
 def process_data(dataframe):
     new_df = fill_columns_with_mod(dataframe)

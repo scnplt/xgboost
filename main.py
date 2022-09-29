@@ -1,11 +1,11 @@
-import pickle
-import pandas as pd
-
-import numpy as np
+from process import process_data
 from fastapi import FastAPI
 from pydantic import BaseModel
+from constant import MODEL_PATH
 
-from process import process_data
+import pandas as pd
+import numpy as np
+import pickle
 
 class ScroingItem(BaseModel):
     gender:str
@@ -28,7 +28,7 @@ class ScroingItem(BaseModel):
     MonthlyCharges:float
     TotalCharges:float
 
-model = pickle.load(open("pickle_files\\model.pkl", "rb"))
+model = pickle.load(open(MODEL_PATH, "rb"))
 
 app = FastAPI()
 
