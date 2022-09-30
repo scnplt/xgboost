@@ -49,20 +49,13 @@ def get_data_from_file(path, create_file_if_not_exist=True, create_data_callback
     return data
 
 def create_label_encoders_dict(dataframe, categorical_columns):
-    encoders = dict()
-    for col in categorical_columns:
-        encoders[col] = LabelEncoder().fit(dataframe[col])
-    return encoders
+    return {col: LabelEncoder().fit(dataframe[col]) for col in categorical_columns}
 
 def create_robust_scalers_dict(dataframe, columns):
-    scalers = dict()
-    for col in columns:
-        scalers[col] = RobustScaler().fit(dataframe[col].to_numpy().reshape(-1, 1))
-    return scalers
+    return {col: RobustScaler().fit(dataframe[col].to_numpy().reshape(-1, 1)) for col in columns}
     
 def fill_columns_with_mod(dataframe):
     dataframe = dataframe.replace(' ', np.nan)
-
     for col in dataframe.columns:
         dataframe[col].fillna(dataframe[col].mode()[0], inplace=True)
     return dataframe
