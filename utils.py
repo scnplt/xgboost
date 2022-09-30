@@ -1,4 +1,4 @@
-from constant import UNIQUE_VALUES_IN_COLUMNS, FAKE_DATA_FOLDER_PATH
+from constant import UNIQUE_VALUES_IN_COLUMNS_PATH, FAKE_DATA_FOLDER_PATH
 from process import *
 
 import pandas as pd
@@ -17,8 +17,9 @@ def fake_data_generator(df, row_size):
     df = convert_dtypes_to_categorical_if_needed(df)
 
     uniq_values = get_data_from_file(
-        path = UNIQUE_VALUES_IN_COLUMNS, 
-        create_data_callback = lambda: [df[col].unique() if df[col].dtype == "category" else list(range(int(df[col].min()), int(df[col].max()))) for col in df.columns if col != "Churn"])
+        path = UNIQUE_VALUES_IN_COLUMNS_PATH, 
+        create_data_callback = lambda: [df[col].unique() if df[col].dtype == "category" else list(range(int(df[col].min()), int(df[col].max()))) for col in df.columns if col != "Churn"]
+    )
 
     data = [[rnd.choice(values) for values in uniq_values] for _ in range(row_size)]
 
